@@ -41,6 +41,7 @@ class Builder {
   constructor() {
     this.content = document.getElementById("content");
   }
+
   static buildHeader() {
     const header = document.createElement("header");
     const burgerIcon = document.createElement("div");
@@ -54,6 +55,49 @@ class Builder {
     header.append(burgerIcon, addTodo, settings);
     content.appendChild(header);
   }
+
+  static buildMain() {
+    this.main = document.createElement("div");
+    this.main.id = "main";
+    content.appendChild(this.main);
+  }
+
+  static buildProjectList() {
+    const projectContent = document.createElement("div");
+    const newProjectText = document.createElement("input");
+    const addProject = document.createElement("div");
+    this.projectList = document.createElement("div");
+
+    projectContent.id = "project-content";
+    newProjectText.id = "new-project";
+    addProject.id = "add-project";
+    this.projectList.id = "project-list";
+
+    projectContent.append(newProjectText, addProject, this.projectList);
+    main.appendChild(projectContent);
+  }
+
+  static buildProject(name) {
+    const project = document.createElement("div");
+    const projectName = document.createElement("div");
+    const projectRename = document.createElement("div");
+    const projectDelete = document.createElement("div");
+
+    project.classList = "project";
+    projectName.classList = "project-name";
+    projectRename.classList = "project-rename";
+    projectDelete.classList = "project-delete";
+
+    projectName.innerText = name;
+    projectRename.innerText = "R";
+    projectDelete.innerText = "X";
+
+    project.append(projectName, projectRename, projectDelete);
+    this.projectList.appendChild(project);
+  }
 }
 
 Builder.buildHeader();
+Builder.buildMain();
+Builder.buildProjectList();
+Builder.buildProject("projectname");
