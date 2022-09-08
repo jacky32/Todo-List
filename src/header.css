@@ -1,0 +1,32 @@
+header {
+  display: grid;
+  grid-template-columns: 60px auto 60px 40px 60px;
+  align-items: center;
+  text-align: center;
+  background-color: lightskyblue;
+}
+
+#burger-icon {
+  grid-column: 1;
+}
+
+#add-todo {
+  grid-column: 3;
+}
+
+#settings {
+  grid-column: 5;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  user-select: none;
+}
+
+header > div:hover {
+  background-color: lightgrey;
+}

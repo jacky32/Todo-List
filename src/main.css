@@ -1,0 +1,145 @@
+#main {
+  display: flex;
+  min-height: 0;
+}
+
+#project-content {
+  background-color: lightcoral;
+  width: 420px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 40px;
+  grid-template-rows: 60px auto;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+}
+
+#new-project {
+  height: 40px;
+  border-radius: 40px;
+  box-sizing: border-box;
+  border: none;
+  padding: 12px 20px;
+}
+
+#add-project {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border: 1px solid white;
+  border-radius: 40px;
+  user-select: none;
+}
+
+#add-project:hover {
+  background-color: rgb(214, 115, 115);
+}
+
+#project-list {
+  grid-column: 1 / 3;
+  align-self: stretch;
+  overflow: auto;
+  padding: 8px 16px 8px 0;
+  margin-bottom: 12px;
+
+  display: grid;
+  grid-auto-rows: 36px;
+  align-items: center;
+  gap: 12px;
+}
+
+.project {
+  border: 1px solid white;
+  border-radius: 40px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 36px 36px;
+  align-items: center;
+}
+
+.project:hover {
+  background-color: rgb(214, 115, 115);
+}
+
+#todo-content {
+  background-color: lightcyan;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, 360px);
+  grid-auto-rows: 360px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.todo {
+  width: 80%;
+  height: 80%;
+  box-sizing: border-box;
+  background-color: lightblue;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: auto 40px 40px;
+  grid-template-rows: 40px 40px auto 40px;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.todo > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 40px;
+}
+
+.todo-name {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.todo-rename {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.todo-delete {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.todo-due-date {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.todo-edit {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+
+.todo-description {
+  grid-column: 1 / 4;
+  grid-row: 3;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 16px !important;
+  justify-content: start !important;
+  align-items: start !important;
+}
+
+.todo-star {
+  grid-column: 3;
+  grid-row: 4;
+}
