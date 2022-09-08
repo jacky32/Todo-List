@@ -114,6 +114,10 @@
         align-items: center;
       }
 
+      .project:hover {
+        background-color: rgb(214, 115, 115);
+      }
+
       #todo-content {
         background-color: lightcyan;
         width: 100%;
@@ -131,7 +135,66 @@
       .todo {
         width: 80%;
         height: 80%;
-        background-color: black;
+        box-sizing: border-box;
+        background-color: lightblue;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: auto 40px 40px;
+        grid-template-rows: 40px 40px auto 40px;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 12px;
+      }
+
+      .todo > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        border: 1px solid white;
+        border-radius: 40px;
+      }
+
+      .todo-name {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .todo-rename {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .todo-delete {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .todo-due-date {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .todo-edit {
+        grid-column: 2 / 4;
+        grid-row: 2;
+      }
+
+      .todo-description {
+        grid-column: 1 / 4;
+        grid-row: 3;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 16px !important;
+        justify-content: start !important;
+        align-items: start !important;
+      }
+
+      .todo-star {
+        grid-column: 3;
+        grid-row: 4;
       }
     </style>
   </head>
@@ -245,19 +308,51 @@
           </div>
         </div>
         <div id="todo-content">
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
-          <div class="todo"></div>
+          <div class="todo">
+            <div class="todo-name">Name</div>
+            <div class="todo-rename">R</div>
+            <div class="todo-delete">X</div>
+            <div class="todo-due-date">12/12/2020</div>
+            <div class="todo-edit">Edit</div>
+            <div class="todo-description">Description</div>
+            <div class="todo-star">*</div>
+          </div>
+          <div class="todo">
+            <div class="todo-name">Name</div>
+            <div class="todo-rename">R</div>
+            <div class="todo-delete">X</div>
+            <div class="todo-due-date">12/12/2020</div>
+            <div class="todo-edit">Edit</div>
+            <div class="todo-description">Description</div>
+            <div class="todo-star">*</div>
+          </div>
+          <div class="todo">
+            <div class="todo-name">Name</div>
+            <div class="todo-rename">R</div>
+            <div class="todo-delete">X</div>
+            <div class="todo-due-date">12/12/2020</div>
+            <div class="todo-edit">Edit</div>
+            <div class="todo-description">Description</div>
+            <div class="todo-star">*</div>
+          </div>
+          <div class="todo">
+            <div class="todo-name">Name</div>
+            <div class="todo-rename">R</div>
+            <div class="todo-delete">X</div>
+            <div class="todo-due-date">12/12/2020</div>
+            <div class="todo-edit">Edit</div>
+            <div class="todo-description">Description</div>
+            <div class="todo-star">*</div>
+          </div>
+          <div class="todo">
+            <div class="todo-name">Name</div>
+            <div class="todo-rename">R</div>
+            <div class="todo-delete">X</div>
+            <div class="todo-due-date">12/12/2020</div>
+            <div class="todo-edit">Edit</div>
+            <div class="todo-description">Description</div>
+            <div class="todo-star">*</div>
+          </div>
         </div>
       </div>
     </div>
