@@ -136,6 +136,12 @@ class Builder {
     );
     this.todoContent.appendChild(todo);
   }
+
+  static destroyTodos() {
+    while (this.todoContent.hasChildNodes()) {
+      this.todoContent.removeChild(this.todoContent.firstChild);
+    }
+  }
 }
 
 class App {
@@ -158,12 +164,13 @@ class App {
     const project = new Project(id, name);
     this.projects[id] = project;
     this.currentProject = project;
+    this.currentProject.loadTodos();
     this.projectCount++;
   }
 
   static selectProject(id) {
     this.currentProject = this.projects[id];
-    this.currentProject.loadTodos;
+    this.currentProject.loadTodos();
   }
 
   static deleteProject(id) {
@@ -187,7 +194,7 @@ class Project {
   createTodo(name, dueDate, description) {
     const todoId = this.todoCount;
     const todo = new Todo(todoId, name, dueDate, description);
-    this.todos.todoId = todo;
+    this.todos[todoId] = todo;
     this.todoCount++;
   }
 
@@ -196,7 +203,16 @@ class Project {
   }
 
   loadTodos() {
-    for (let i = 0; i < this.todos.keys.length; i++) {}
+    Builder.destroyTodos();
+    const todosArray = Object.keys(this.todos);
+    for (let i = 0; i < todosArray.length; i++) {
+      Builder.buildTodo(
+        this.todos[todosArray[i]].getId,
+        this.todos[todosArray[i]].getName,
+        this.todos[todosArray[i]].getDueDate,
+        this.todos[todosArray[i]].getDescription
+      );
+    }
   }
 }
 
@@ -217,8 +233,19 @@ class Todo {
   get getId() {
     return this.id;
   }
+
+  get getName() {
+    return this.name;
+  }
+
+  get getDueDate() {
+    return this.dueDate;
+  }
+
+  get getDescription() {
+    return this.description;
+  }
 }
 
 const app = new App();
 App.createProject("jmeno");
-console.log(app.projects);
