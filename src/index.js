@@ -48,6 +48,7 @@ class Builder {
 
     addProject.addEventListener("click", () => {
       App.createProject(newProjectText.value);
+      newProjectText.value = "";
     });
 
     projectContent.append(newProjectText, addProject, this.projectList);
