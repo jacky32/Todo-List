@@ -154,12 +154,10 @@ class App {
 
   static selectProject(id) {
     this.currentProject = this.projects[id];
-    console.log(this.currentProject);
   }
 
   static deleteProject(id) {
     delete this.projects[id];
-    console.log(this.projects);
   }
 }
 
