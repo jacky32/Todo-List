@@ -21,6 +21,10 @@ class Builder {
     addTodo.textContent = "+";
     settings.textContent = "*";
 
+    addTodo.addEventListener("click", () => {
+      App.currentProject.createTodo();
+    });
+
     header.append(burgerIcon, addTodo, settings);
     content.appendChild(header);
   }
@@ -116,6 +120,11 @@ class Builder {
     todoDescription.innerText = description;
     todoStar.innerText = "*";
 
+    todoDelete.addEventListener("click", () => {
+      App.currentProject.deleteTodo(id);
+      todo.remove();
+    });
+
     todo.append(
       todoName,
       todoRename,
@@ -154,6 +163,7 @@ class App {
 
   static selectProject(id) {
     this.currentProject = this.projects[id];
+    this.currentProject.loadTodos;
   }
 
   static deleteProject(id) {
@@ -179,6 +189,14 @@ class Project {
     const todo = new Todo(todoId, name, dueDate, description);
     this.todos.todoId = todo;
     this.todoCount++;
+  }
+
+  deleteTodo(todoId) {
+    delete this.todos[todoId];
+  }
+
+  loadTodos() {
+    for (let i = 0; i < this.todos.keys.length; i++) {}
   }
 }
 
