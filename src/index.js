@@ -74,6 +74,10 @@ class Builder {
       project.remove();
     });
 
+    project.addEventListener("click", () => {
+      App.selectProject(id);
+    });
+
     project.append(projectName, projectRename, projectDelete);
     this.projectList.appendChild(project);
   }
@@ -104,12 +108,12 @@ class Builder {
     todoDescription.classList = "todo-description";
     todoStar.classList = "todo-star";
 
-    todoName.innerText = "The name";
+    todoName.innerText = name;
     todoRename.innerText = "R";
     todoDelete.innerText = "X";
-    todoDueDate.innerText = "12/12/1222";
+    todoDueDate.innerText = dueDate;
     todoEdit.innerText = "Edit";
-    todoDescription.innerText = "Description";
+    todoDescription.innerText = description;
     todoStar.innerText = "*";
 
     todo.append(
@@ -128,6 +132,7 @@ class Builder {
 class App {
   static projectCount = 0;
   static projects = {};
+  static currentProject;
   constructor() {
     this.#buildAll();
   }
@@ -143,7 +148,13 @@ class App {
     const id = this.projectCount;
     const project = new Project(id, name);
     this.projects[id] = project;
+    this.currentProject = project;
     this.projectCount++;
+  }
+
+  static selectProject(id) {
+    this.currentProject = this.projects[id];
+    console.log(this.currentProject);
   }
 
   static deleteProject(id) {
