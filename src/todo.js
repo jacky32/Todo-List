@@ -25,10 +25,6 @@ export default class Todo {
       this.project.deleteTodo(this.id);
       deleteButton.parentElement.remove();
     });
-    // todoDelete.addEventListener("click", () => {
-    //   project.deleteTodo(id);
-    //   todo.remove();
-    // });
   }
 
   get getId() {
