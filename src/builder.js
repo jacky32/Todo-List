@@ -44,6 +44,10 @@ export default class Builder {
     addTodo.appendChild(plusIcon);
     settings.appendChild(settingsIcon);
 
+    burgerIcon.addEventListener("click", () => {
+      this.projectContent.classList.toggle("hidden");
+    });
+
     header.append(burgerIcon, addTodo, settings);
     this.content.appendChild(header);
 
@@ -57,7 +61,7 @@ export default class Builder {
   }
 
   static buildProjectList() {
-    const projectContent = document.createElement("div");
+    this.projectContent = document.createElement("div");
     const newProjectText = document.createElement("input");
     const addProject = document.createElement("div");
     this.projectList = document.createElement("div");
@@ -67,13 +71,13 @@ export default class Builder {
 
     addProject.appendChild(plusIcon);
 
-    projectContent.id = "project-content";
+    this.projectContent.id = "project-content";
     newProjectText.id = "new-project";
     addProject.id = "add-project";
     this.projectList.id = "project-list";
 
-    projectContent.append(newProjectText, addProject, this.projectList);
-    this.main.appendChild(projectContent);
+    this.projectContent.append(newProjectText, addProject, this.projectList);
+    this.main.appendChild(this.projectContent);
 
     return addProject;
   }
