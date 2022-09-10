@@ -61,7 +61,6 @@ class Builder {
     const projectRename = document.createElement("div");
     const projectDelete = document.createElement("div");
 
-    project.classList = "project";
     projectName.classList = "project-name";
     projectRename.classList = "project-rename";
     projectDelete.classList = "project-delete";
@@ -77,14 +76,28 @@ class Builder {
     projectDelete.addEventListener("click", () => {
       App.deleteProject(id);
       project.remove();
+      Builder.toggleProjectSelected();
     });
 
-    project.addEventListener("click", () => {
+    projectName.addEventListener("click", () => {
       App.selectProject(id);
+      Builder.toggleProjectSelected(project);
     });
 
+    Builder.toggleProjectSelected(project);
     project.append(projectName, projectRename, projectDelete);
     this.projectList.appendChild(project);
+  }
+
+  static toggleProjectSelected(project = this.projectList.firstChild) {
+    const projects = this.projectList.childNodes;
+    if (project == null) {
+      return;
+    }
+    for (let i = 0; i < projects.length; i++) {
+      projects[i].classList = "project";
+    }
+    project.classList = "project selected";
   }
 
   static buildTodoContent() {
@@ -171,11 +184,19 @@ class App {
 
   static selectProject(id) {
     this.currentProject = this.projects[id];
+    if (this.currentProject == undefined) {
+      return;
+    }
     this.currentProject.loadTodos();
   }
 
   static deleteProject(id) {
     delete this.projects[id];
+    App.selectProject(Object.keys(this.projects)[0]);
+  }
+
+  static getFirstProject() {
+    return Object.keys(this.projects)[0];
   }
 }
 
@@ -201,6 +222,13 @@ class Project {
 
   deleteTodo(todoId) {
     delete this.todos[todoId];
+  }
+
+  deleteTodos() {
+    todoAmount = Object.keys(this.todos).length;
+    for (let i = 0; i < todoAmount; i++) {
+      delete this.todos[i];
+    }
   }
 
   loadTodos() {

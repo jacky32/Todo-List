@@ -66,6 +66,13 @@
   background-color: rgb(214, 115, 115);
 }
 
+.project-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .project-rename {
   user-select: none;
 }
@@ -75,7 +82,7 @@
 }
 
 .selected {
-  background-color: rgb(223, 124, 124);
+  background-color: rgb(204, 109, 109);
 }
 
 #todo-content {
