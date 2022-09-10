@@ -72,7 +72,7 @@
   height: 100%;
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(4, 360px);
+  grid-template-columns: repeat(auto-fit, 360px);
   grid-auto-rows: 360px;
   align-items: center;
   justify-items: center;
