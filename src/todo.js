@@ -13,18 +13,9 @@ export default class Todo {
     this.dueDate = dueDate;
     this.description = description;
     this.project = project;
-    const deleteButton = Builder.buildTodo(
-      this.id,
-      this.name,
-      this.dueDate,
-      this.description,
-      this.project
-    );
+    this.starred = false;
 
-    deleteButton.addEventListener("click", () => {
-      this.project.deleteTodo(this.id);
-      deleteButton.parentElement.remove();
-    });
+    this.buildSelf();
   }
 
   get getId() {
@@ -41,5 +32,25 @@ export default class Todo {
 
   get getDescription() {
     return this.description;
+  }
+
+  get getStarred() {
+    return this.starred;
+  }
+
+  buildSelf() {
+    const deleteButton = Builder.buildTodo(
+      this.id,
+      this.name,
+      this.dueDate,
+      this.description,
+      this.project,
+      this.starred
+    );
+
+    deleteButton.addEventListener("click", () => {
+      this.project.deleteTodo(this.id);
+      deleteButton.parentElement.remove();
+    });
   }
 }

@@ -36,18 +36,7 @@ export default class Project {
     Builder.destroyTodos();
     const todosArray = Object.keys(this.todos);
     for (let i = 0; i < todosArray.length; i++) {
-      const deleteButton = Builder.buildTodo(
-        this.todos[todosArray[i]].getId,
-        this.todos[todosArray[i]].getName,
-        this.todos[todosArray[i]].getDueDate,
-        this.todos[todosArray[i]].getDescription,
-        this
-      );
-
-      deleteButton.addEventListener("click", () => {
-        this.deleteTodo(this.todos[todosArray[i]].getId);
-        deleteButton.parentElement.remove();
-      });
+      this.todos[todosArray[i]].buildSelf();
     }
   }
 }
