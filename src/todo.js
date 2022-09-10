@@ -39,18 +39,21 @@ export default class Todo {
   }
 
   buildSelf() {
-    const deleteButton = Builder.buildTodo(
-      this.id,
+    const buttons = Builder.buildTodo(
       this.name,
       this.dueDate,
       this.description,
-      this.project,
       this.starred
     );
 
-    deleteButton.addEventListener("click", () => {
+    buttons.todoDelete.addEventListener("click", () => {
       this.project.deleteTodo(this.id);
-      deleteButton.parentElement.remove();
+      buttons.todoDelete.parentElement.remove();
+    });
+
+    buttons.todoStar.addEventListener("click", () => {
+      this.starred = this.starred == false ? true : false;
+      Builder.toggleStars(buttons.todoStar, this.starred);
     });
   }
 }

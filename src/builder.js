@@ -123,7 +123,7 @@ export default class Builder {
     this.main.appendChild(this.todoContent);
   }
 
-  static buildTodo(id, name, dueDate, description, project) {
+  static buildTodo(name, dueDate, description, starred) {
     const todo = document.createElement("div");
     const todoName = document.createElement("div");
     const todoRename = document.createElement("div");
@@ -142,11 +142,9 @@ export default class Builder {
     todoDescription.classList = "todo-description";
     todoStar.classList = "todo-star";
 
-    const emptyStarIcon = new Image();
     const trashIcon = new Image();
     const editIcon = new Image();
 
-    emptyStarIcon.src = EmptyStar;
     trashIcon.src = EmptyTrash;
     editIcon.src = EmptyPencil;
 
@@ -156,7 +154,8 @@ export default class Builder {
     todoDueDate.innerText = dueDate;
     todoEdit.innerText = "Edit";
     todoDescription.innerText = description;
-    todoStar.appendChild(emptyStarIcon);
+
+    Builder.toggleStars(todoStar, starred);
 
     todo.append(
       todoName,
@@ -169,7 +168,24 @@ export default class Builder {
     );
     this.todoContent.appendChild(todo);
 
-    return todoDelete;
+    return { todoDelete, todoStar };
+  }
+
+  static toggleStars(todoStar, starred) {
+    const emptyStarIcon = new Image();
+    const fullStarIcon = new Image();
+
+    emptyStarIcon.src = EmptyStar;
+    fullStarIcon.src = FullStar;
+
+    if (todoStar.hasChildNodes() == true) {
+      todoStar.removeChild(todoStar.firstChild);
+    }
+    if (starred == false) {
+      todoStar.appendChild(emptyStarIcon);
+    } else {
+      todoStar.appendChild(fullStarIcon);
+    }
   }
 
   static destroyTodos() {
