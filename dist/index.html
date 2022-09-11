@@ -1,9 +1,107 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>ToDo List</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="index.bundle.js"></script><script defer src="builder.bundle.js"></script><script defer src="project.bundle.js"></script><script defer src="todo.bundle.js"></script></head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="index.bundle.js"></script>
+    <script defer src="builder.bundle.js"></script>
+    <script defer src="project.bundle.js"></script>
+    <script defer src="todo.bundle.js"></script>
+    <style>
+      .todo-modal-outer {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(169, 169, 169, 0.233);
+      }
+
+      .todo-modal {
+        width: 480px !important;
+        height: 560px !important;
+        background-color: darkgoldenrod;
+      }
+
+      #todo-form {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 120px 60px 1fr 60px;
+      }
+
+      legend {
+        grid-column: 1 / 3;
+        font-size: 40px;
+        text-align: center;
+      }
+
+      .new-todo-description {
+        grid-column: 1 / 3;
+        grid-row: 3;
+      }
+
+      #todo-form > div,
+      #todo-form > legend {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .new-todo-description {
+        height: 100%;
+        width: 100%;
+      }
+
+      #new-todo-description {
+        height: 80%;
+        width: 80%;
+      }
+
+      #new-todo-submit {
+        height: 60%;
+        width: 60%;
+        font-size: 18px;
+      }
+    </style>
+  </head>
   <body>
+    <div class="todo-modal-outer">
+      <div class="todo-modal">
+        <form id="todo-form">
+          <legend>New Todo</legend>
+          <div class="new-todo-name">
+            <label for="new-todo-name">ToDo name:</label>
+            <input type="text" name="new-todo-name" id="new-todo-name" />
+          </div>
+          <div class="new-todo-due-date">
+            <label for="new-todo-due-date">Due date:</label>
+            <input
+              type="date"
+              name="new-todo-due-date"
+              id="new-todo-due-date"
+            />
+          </div>
+          <div class="new-todo-description">
+            <label for="new-todo-description">Description:</label>
+            <input
+              type="text"
+              name="new-todo-description"
+              id="new-todo-description"
+            />
+          </div>
+          <div class="new-todo-star">
+            <img src="http://127.0.0.1:5500/dist/36fff3147d701699368a.svg" />
+          </div>
+          <div class="submit">
+            <input type="submit" value="Submit" id="new-todo-submit" />
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
