@@ -19,10 +19,20 @@ export default class App {
     Builder.buildMain();
     const addProjectButton = Builder.buildProjectList();
     Builder.buildTodoContent();
-    Builder.buildNewTodoModal();
 
     addTodoButton.addEventListener("click", () => {
-      App.currentProject.createTodo();
+      const submitted = Builder.buildNewTodoModal();
+
+      submitted.todoSubmit.addEventListener("click", (e) => {
+        e.preventDefault();
+        App.currentProject.createTodo(
+          submitted.todoNewNameInput.value,
+          submitted.todoNewDueDateInput.value,
+          submitted.todoNewDescriptionText.value,
+          submitted.todoNewStarInput.value
+        );
+        submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
+      });
     });
 
     addProjectButton.addEventListener("click", () => {
@@ -40,10 +50,6 @@ export default class App {
     this.currentProject = project;
     this.currentProject.loadTodos();
     this.projectCount++;
-
-    // projectRename.addEventListener("click", () => {
-    //   console.log("rename");
-    // });
 
     projectDoms.projectRename.addEventListener("click", () => {
       console.log("rename");

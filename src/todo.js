@@ -3,9 +3,10 @@ import Builder from "./builder.js";
 export default class Todo {
   constructor(
     id,
-    name = "Default name",
+    name,
     dueDate = "12/12/1212",
     description = "Default description",
+    starred = false,
     project
   ) {
     this.id = id;
@@ -13,7 +14,7 @@ export default class Todo {
     this.dueDate = dueDate;
     this.description = description;
     this.project = project;
-    this.starred = false;
+    this.starred = starred;
 
     this.buildSelf();
   }

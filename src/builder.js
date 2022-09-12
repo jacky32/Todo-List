@@ -200,7 +200,12 @@ export default class Builder {
     }
   }
 
-  static buildNewTodoModal() {
+  static buildNewTodoModal(
+    name = "",
+    dueDate = "",
+    description = "",
+    starred = false
+  ) {
     const todoModalOuter = document.createElement("div");
     const todoModal = document.createElement("div");
     const todoForm = document.createElement("form");
@@ -298,5 +303,12 @@ export default class Builder {
         todoModalOuter.remove();
       }
     });
+    return {
+      todoNewNameInput,
+      todoNewDueDateInput,
+      todoNewDescriptionText,
+      todoNewStarInput,
+      todoSubmit,
+    };
   }
 }

@@ -13,9 +13,9 @@ export default class Project {
     return this.id;
   }
 
-  createTodo(name, dueDate, description) {
+  createTodo(name, dueDate, description, starred) {
     const todoId = this.todoCount;
-    const todo = new Todo(todoId, name, dueDate, description, this);
+    const todo = new Todo(todoId, name, dueDate, description, starred, this);
 
     this.todos[todoId] = todo;
     this.todoCount++;
