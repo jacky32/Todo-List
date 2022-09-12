@@ -19,6 +19,7 @@ export default class App {
     Builder.buildMain();
     const addProjectButton = Builder.buildProjectList();
     Builder.buildTodoContent();
+    Builder.buildNewTodoModal();
 
     addTodoButton.addEventListener("click", () => {
       App.currentProject.createTodo();

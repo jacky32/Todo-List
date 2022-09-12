@@ -12,6 +12,8 @@ import FullPlusCircle from "./assets/plus-circle-f.svg";
 import EmptyPlusRectangle from "./assets/plus-rectangle.svg";
 import FullPlusRectangle from "./assets/plus-rectangle-f.svg";
 
+import "./new-todo-modal.css";
+
 export default class Builder {
   constructor() {}
 
@@ -196,5 +198,99 @@ export default class Builder {
     while (this.todoContent.hasChildNodes()) {
       this.todoContent.removeChild(this.todoContent.firstChild);
     }
+  }
+
+  static buildNewTodoModal() {
+    const todoModalOuter = document.createElement("div");
+    const todoModal = document.createElement("div");
+    const todoForm = document.createElement("form");
+    const todoLegend = document.createElement("legend");
+
+    todoModalOuter.id = "todo-modal-outer";
+    todoModal.id = "todo-modal";
+    todoForm.id = "todo-form";
+
+    todoLegend.textContent = "New ToDo";
+
+    todoForm.appendChild(todoLegend);
+    todoModal.appendChild(todoForm);
+    todoModalOuter.appendChild(todoModal);
+
+    const todoNewName = document.createElement("div");
+    const todoNewNameLabel = document.createElement("label");
+    const todoNewNameInput = document.createElement("input");
+
+    todoNewName.classList = "new-todo-name";
+    todoNewNameInput.id = "new-todo-name";
+    todoNewNameLabel.setAttribute("for", "new-todo-name");
+    todoNewNameInput.setAttribute("type", "text");
+    todoNewNameInput.setAttribute("name", "new-todo-name");
+    todoNewNameInput.setAttribute("minlength", 4);
+    todoNewNameInput.setAttribute("maxlength", 16);
+    todoNewNameInput.setAttribute("placeholder", "ToDo name");
+    todoNewNameInput.setAttribute("required", true);
+    todoNewNameLabel.textContent = "Name:";
+
+    todoNewName.append(todoNewNameLabel, todoNewNameInput);
+
+    const todoNewDueDate = document.createElement("div");
+    const todoNewDueDateLabel = document.createElement("label");
+    const todoNewDueDateInput = document.createElement("input");
+
+    todoNewDueDate.classList = "new-todo-due-date";
+    todoNewDueDateLabel.setAttribute("for", "new-todo-due-date");
+    todoNewDueDateInput.id = "new-todo-due-date";
+    todoNewDueDateInput.setAttribute("type", "date");
+    todoNewDueDateInput.setAttribute("name", "new-todo-due-date");
+    todoNewDueDateInput.setAttribute("required", true);
+
+    todoNewDueDateLabel.textContent = "Due date:";
+
+    todoNewDueDate.append(todoNewDueDateLabel, todoNewDueDateInput);
+
+    const todoNewDescription = document.createElement("div");
+    const todoNewDescriptionLabel = document.createElement("label");
+    const todoNewDescriptionText = document.createElement("textarea");
+
+    todoNewDescription.classList = "new-todo-description";
+    todoNewDescriptionText.id = "new-todo-description";
+    todoNewDescriptionLabel.setAttribute("for", "new-todo-description");
+    todoNewDescriptionLabel.textContent = "Description:";
+    todoNewDescriptionText.setAttribute("placeholder", "Description");
+    todoNewDescriptionText.setAttribute("name", "new-todo-description");
+    todoNewDescriptionText.setAttribute("required", true);
+
+    todoNewDescription.append(todoNewDescriptionLabel, todoNewDescriptionText);
+
+    const todoNewStar = document.createElement("div");
+    const todoNewStarInput = document.createElement("input");
+
+    todoNewStar.classList = "new-todo-star";
+    todoNewStarInput.id = "new-todo-star";
+    todoNewStarInput.setAttribute("type", "checkbox");
+    todoNewStarInput.setAttribute("name", "new-todo-star");
+    const starImg = new Image();
+    starImg.src = EmptyStar;
+
+    todoNewStar.append(todoNewStarInput, starImg);
+
+    const todoSubmit = document.createElement("div");
+    const todoSubmitInput = document.createElement("input");
+
+    todoSubmit.classList = "new-todo-submit";
+    todoSubmitInput.id = "new-todo-submit";
+    todoSubmitInput.setAttribute("type", "submit");
+    todoSubmitInput.setAttribute("value", "Submit");
+
+    todoSubmit.appendChild(todoSubmitInput);
+
+    todoForm.append(
+      todoNewName,
+      todoNewDueDate,
+      todoNewDescription,
+      todoNewStar,
+      todoSubmit
+    );
+    this.content.appendChild(todoModalOuter);
   }
 }

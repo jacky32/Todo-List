@@ -1,0 +1,77 @@
+#todo-modal-outer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(116, 116, 116, 0.308);
+}
+
+#todo-modal {
+  width: 480px !important;
+  height: 560px !important;
+  background-color: darkgoldenrod;
+}
+
+#todo-form {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 120px 60px 1fr 60px;
+}
+
+legend {
+  grid-column: 1 / 6;
+  font-size: 40px;
+  text-align: center;
+}
+
+.new-todo-name {
+  grid-column: 1 / 5;
+}
+
+.new-todo-star {
+  justify-content: start !important;
+}
+
+.new-todo-description {
+  grid-column: 1 / 6;
+  grid-row: 3;
+}
+
+.new-todo-due-date {
+  grid-column: 1 / 4;
+  grid-row: 4;
+}
+
+#todo-form > div,
+#todo-form > legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  width: 100%;
+}
+
+.new-todo-description {
+  flex-direction: column;
+}
+
+#new-todo-description {
+  height: 80%;
+  width: 80%;
+}
+
+.new-todo-submit {
+  grid-column: 4 / 6;
+  grid-row: 4;
+}
+
+#new-todo-submit {
+  height: 60%;
+  width: 60%;
+  font-size: 18px;
+}
