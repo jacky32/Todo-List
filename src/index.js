@@ -25,13 +25,20 @@ export default class App {
 
       submitted.todoSubmit.addEventListener("click", (e) => {
         e.preventDefault();
-        App.currentProject.createTodo(
-          submitted.todoNewNameInput.value,
-          submitted.todoNewDueDateInput.value,
-          submitted.todoNewDescriptionText.value,
-          submitted.todoNewStarInput.value
-        );
-        submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
+        // if (!submitted.todoNewNameInput.checkValidity()) {
+        // } else if (!submitted.todoNewDueDateInput.checkValidity()) {
+        // } else if (!submitted.todoNewDescriptionText.checkValidity()) {
+        if (!submitted.todoSubmit.parentElement.reportValidity()) {
+          console.log("invalid");
+        } else {
+          App.currentProject.createTodo(
+            submitted.todoNewNameInput.value,
+            submitted.todoNewDueDateInput.value,
+            submitted.todoNewDescriptionText.value,
+            submitted.todoNewStarInput.value
+          );
+          submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
+        }
       });
     });
 
