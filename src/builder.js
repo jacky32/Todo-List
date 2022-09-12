@@ -292,5 +292,11 @@ export default class Builder {
       todoSubmit
     );
     this.content.appendChild(todoModalOuter);
+
+    todoModalOuter.addEventListener("click", (event) => {
+      if (event.target == todoModalOuter) {
+        todoModalOuter.remove();
+      }
+    });
   }
 }
