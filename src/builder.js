@@ -291,8 +291,8 @@ export default class Builder {
 
     todoForm.append(
       todoNewName,
-      todoNewDueDate,
       todoNewDescription,
+      todoNewDueDate,
       todoNewStar,
       todoSubmit
     );
