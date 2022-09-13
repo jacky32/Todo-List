@@ -11,6 +11,20 @@ export default class App {
   static currentProject;
   constructor() {
     this.#buildAll();
+    this.#loadFromStorage();
+  }
+
+  #loadFromStorage() {
+    try {
+      const app = JSON.parse(window.localStorage.getItem("app"));
+      const projects = app.projects;
+      console.log(Object.keys(projects));
+      for (let i = 0; i < Object.keys(projects).length; i++) {
+        App.createProject(projects[i].name);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   #buildAll() {
@@ -25,9 +39,6 @@ export default class App {
 
       submitted.todoSubmit.addEventListener("click", (e) => {
         e.preventDefault();
-        // if (!submitted.todoNewNameInput.checkValidity()) {
-        // } else if (!submitted.todoNewDueDateInput.checkValidity()) {
-        // } else if (!submitted.todoNewDescriptionText.checkValidity()) {
         if (!submitted.todoSubmit.parentElement.reportValidity()) {
           console.log("invalid");
         } else {
@@ -72,6 +83,8 @@ export default class App {
       App.selectProject(id);
       Builder.toggleProjectSelected(projectDoms.projectName.parentElement);
     });
+
+    App.saveProjectsToLocalStorage();
   }
 
   static selectProject(id) {
@@ -80,11 +93,26 @@ export default class App {
       return;
     }
     this.currentProject.loadTodos();
+    App.saveProjectsToLocalStorage();
   }
 
   static deleteProject(id) {
     delete this.projects[id];
     App.selectProject(Object.keys(this.projects)[0]);
+  }
+
+  static saveProjectsToLocalStorage() {
+    const app = {
+      projectCount: this.projectCount,
+      projects: this.projects,
+      currentProject: this.currentProject,
+    };
+    try {
+      window.localStorage.setItem("app", JSON.stringify(app));
+    } catch (e) {
+      console.log(e);
+    }
+    console.log(JSON.parse(window.localStorage.getItem("app")));
   }
 
   static getFirstProject() {
@@ -93,4 +121,3 @@ export default class App {
 }
 
 const app = new App();
-App.createProject("jmeno");

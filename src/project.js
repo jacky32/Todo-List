@@ -13,6 +13,10 @@ export default class Project {
     return this.id;
   }
 
+  get getName() {
+    return this.name;
+  }
+
   createTodo(name, dueDate, description, starred) {
     const todoId = this.todoCount;
     const todo = new Todo(todoId, name, dueDate, description, starred, this);
