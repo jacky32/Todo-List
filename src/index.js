@@ -4,6 +4,7 @@ import "./header.css";
 
 import Builder from "./builder.js";
 import Project from "./project.js";
+import { parse, stringify, toJSON, fromJSON } from "flatted";
 
 export default class App {
   static projectCount = 0;
@@ -16,12 +17,34 @@ export default class App {
 
   #loadFromStorage() {
     try {
-      const app = JSON.parse(window.localStorage.getItem("app"));
+      const app = parse(window.localStorage.getItem("app"));
       const projects = app.projects;
-      console.log(Object.keys(projects));
+      console.log(projects);
       for (let i = 0; i < Object.keys(projects).length; i++) {
-        App.createProject(projects[i].name);
+        const project = App.createProject(projects[i].name);
+        for (let y = 0; y < Object.keys(projects[i].todos).length; y++) {
+          const currentTodo = projects[i].todos[y];
+          project.createTodo(
+            currentTodo.name,
+            currentTodo.dueDate,
+            currentTodo.description,
+            currentTodo.starred
+          );
+        }
       }
+      App.saveProjectsToLocalStorage();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  static saveProjectsToLocalStorage() {
+    const app = {
+      projects: this.projects,
+    };
+    try {
+      window.localStorage.setItem("app", stringify(app));
+      console.log("saved");
     } catch (e) {
       console.log(e);
     }
@@ -49,6 +72,7 @@ export default class App {
             submitted.todoNewStarInput.value
           );
           submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
+          App.saveProjectsToLocalStorage();
         }
       });
     });
@@ -85,6 +109,7 @@ export default class App {
     });
 
     App.saveProjectsToLocalStorage();
+    return project;
   }
 
   static selectProject(id) {
@@ -99,20 +124,6 @@ export default class App {
   static deleteProject(id) {
     delete this.projects[id];
     App.selectProject(Object.keys(this.projects)[0]);
-  }
-
-  static saveProjectsToLocalStorage() {
-    const app = {
-      projectCount: this.projectCount,
-      projects: this.projects,
-      currentProject: this.currentProject,
-    };
-    try {
-      window.localStorage.setItem("app", JSON.stringify(app));
-    } catch (e) {
-      console.log(e);
-    }
-    console.log(JSON.parse(window.localStorage.getItem("app")));
   }
 
   static getFirstProject() {
