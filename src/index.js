@@ -65,11 +65,12 @@ export default class App {
         if (!submitted.todoSubmit.parentElement.reportValidity()) {
           console.log("invalid");
         } else {
+          console.log(submitted.todoNewStarInput.value);
           App.currentProject.createTodo(
             submitted.todoNewNameInput.value,
             submitted.todoNewDueDateInput.value,
             submitted.todoNewDescriptionText.value,
-            submitted.todoNewStarInput.value
+            submitted.todoNewStarInput.checked
           );
           submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
           App.saveProjectsToLocalStorage();
