@@ -59,13 +59,11 @@ export default class Todo {
         this.description,
         this.starred
       );
-      // todoNewNameInput,todoNewDueDateInput, todoNewDescriptionText, todoNewStarInput, todoSubmit
       newValues.todoSubmit.addEventListener("click", (e) => {
         e.preventDefault();
         if (!newValues.todoSubmit.parentElement.reportValidity()) {
           console.log("invalid");
         } else {
-          console.log("aa");
           Builder.editTodo(buttons, newValues);
           newValues.todoSubmit.parentElement.parentElement.parentElement.remove();
         }
