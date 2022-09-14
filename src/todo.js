@@ -52,6 +52,26 @@ export default class Todo {
       buttons.todoDelete.parentElement.remove();
     });
 
+    buttons.todoEdit.addEventListener("click", () => {
+      const newValues = Builder.buildNewTodoModal(
+        this.name,
+        this.dueDate,
+        this.description,
+        this.starred
+      );
+      // todoNewNameInput,todoNewDueDateInput, todoNewDescriptionText, todoNewStarInput, todoSubmit
+      newValues.todoSubmit.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (!newValues.todoSubmit.parentElement.reportValidity()) {
+          console.log("invalid");
+        } else {
+          console.log("aa");
+          Builder.editTodo(buttons, newValues);
+          newValues.todoSubmit.parentElement.parentElement.parentElement.remove();
+        }
+      });
+    });
+
     buttons.todoStar.addEventListener("click", () => {
       this.starred = this.starred == false ? true : false;
       Builder.toggleStars(buttons.todoStar, this.starred);

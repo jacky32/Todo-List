@@ -174,7 +174,15 @@ export default class Builder {
     );
     this.todoContent.appendChild(todo);
 
-    return { todoDelete, todoStar };
+    return {
+      todoDelete,
+      todoEdit,
+      todoStar,
+      todoName,
+      todoDueDate,
+      todoDescription,
+      todoStar,
+    };
   }
 
   static toggleStars(todoStar, starred) {
@@ -233,6 +241,13 @@ export default class Builder {
     todoNewNameInput.setAttribute("minlength", 4);
     todoNewNameInput.setAttribute("maxlength", 16);
     todoNewNameInput.setAttribute("placeholder", "ToDo name");
+
+    if (description != "") {
+      todoNewNameInput.value = name;
+    } else {
+      todoNewNameInput.setAttribute("placeholder", "ToDo name");
+    }
+
     todoNewNameInput.setAttribute("required", true);
     todoNewNameLabel.textContent = "Name:";
 
@@ -249,6 +264,9 @@ export default class Builder {
     todoNewDueDateInput.setAttribute("name", "new-todo-due-date");
     todoNewDueDateInput.setAttribute("required", true);
 
+    todoNewDueDateInput.value =
+      description != "" ? dueDate : new Date().toJSON().slice(0, 10);
+
     todoNewDueDateLabel.textContent = "Due date:";
 
     todoNewDueDate.append(todoNewDueDateLabel, todoNewDueDateInput);
@@ -261,7 +279,12 @@ export default class Builder {
     todoNewDescriptionText.id = "new-todo-description";
     todoNewDescriptionLabel.setAttribute("for", "new-todo-description");
     todoNewDescriptionLabel.textContent = "Description:";
-    todoNewDescriptionText.setAttribute("placeholder", "Description");
+
+    if (description != "") {
+      todoNewDescriptionText.value = description;
+    } else {
+      todoNewDescriptionText.setAttribute("placeholder", "Description");
+    }
     todoNewDescriptionText.setAttribute("name", "new-todo-description");
     todoNewDescriptionText.setAttribute("required", true);
 
@@ -274,6 +297,8 @@ export default class Builder {
     todoNewStarInput.id = "new-todo-star";
     todoNewStarInput.setAttribute("type", "checkbox");
     todoNewStarInput.setAttribute("name", "new-todo-star");
+    todoNewStarInput.checked = starred;
+
     const starImg = new Image();
     starImg.src = EmptyStar;
 
@@ -303,6 +328,7 @@ export default class Builder {
         todoModalOuter.remove();
       }
     });
+
     return {
       todoNewNameInput,
       todoNewDueDateInput,
@@ -310,5 +336,12 @@ export default class Builder {
       todoNewStarInput,
       todoSubmit,
     };
+  }
+
+  static editTodo(todo, modal) {
+    todo.todoName.textContent = modal.todoNewNameInput.value;
+    todo.todoDueDate.textContent = modal.todoNewDueDateInput.value;
+    todo.todoDescription.textContent = modal.todoNewDescriptionText.value;
+    Builder.toggleStars(todo.todoStar, modal.todoNewStarInput.checked);
   }
 }
