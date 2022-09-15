@@ -65,6 +65,10 @@ export default class Todo {
           console.log("invalid");
         } else {
           Builder.editTodo(buttons, newValues);
+          this.name = newValues.todoNewNameInput.value;
+          this.dueDate = newValues.todoNewDueDateInput.value;
+          this.description = newValues.todoNewDescriptionText.value;
+          this.starred = newValues.todoNewStarInput.value;
           newValues.todoSubmit.parentElement.parentElement.parentElement.remove();
         }
       });

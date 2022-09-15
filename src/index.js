@@ -4,7 +4,7 @@ import "./header.css";
 
 import Builder from "./builder.js";
 import Project from "./project.js";
-import { parse, stringify, toJSON, fromJSON } from "flatted";
+import { parse, stringify } from "flatted";
 
 export default class App {
   static projectCount = 0;
@@ -73,7 +73,6 @@ export default class App {
             submitted.todoNewStarInput.checked
           );
           submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
-          App.saveProjectsToLocalStorage();
         }
       });
     });
@@ -82,6 +81,10 @@ export default class App {
       const newProjectText = document.getElementById("new-project");
       App.createProject(newProjectText.value);
       newProjectText.value = "";
+    });
+
+    window.addEventListener("click", () => {
+      setTimeout(App.saveProjectsToLocalStorage(), 200);
     });
   }
 
@@ -109,7 +112,6 @@ export default class App {
       Builder.toggleProjectSelected(projectDoms.projectName.parentElement);
     });
 
-    App.saveProjectsToLocalStorage();
     return project;
   }
 
@@ -119,7 +121,6 @@ export default class App {
       return;
     }
     this.currentProject.loadTodos();
-    App.saveProjectsToLocalStorage();
   }
 
   static deleteProject(id) {
