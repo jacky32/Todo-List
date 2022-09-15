@@ -4,8 +4,7 @@ import { compareAsc, format } from "date-fns";
 
 export default class Project {
   constructor(id, name) {
-    this.todoCount = 0;
-    this.todos = {};
+    this.todos = [];
     this.id = id;
     this.name = name;
   }
@@ -19,27 +18,29 @@ export default class Project {
   }
 
   createTodo(name, dueDate, description, starred) {
-    const todoId = this.todoCount;
-    const todo = new Todo(todoId, name, dueDate, description, starred, this);
+    const todo = new Todo(name, dueDate, description, starred, this);
 
-    this.todos[todoId] = todo;
-    this.todoCount++;
-    // this.sortTodosByDate();
+    this.todos.push(todo);
+    this.sortTodosByDate();
+    this.loadTodos();
   }
 
-  // sortTodosByDate() {
-  //   const sorted = Object.values(this.todos).sort((a, b) => {
-  //     return a.dueDate - b.dueDate;
-  //   });
-  //   console.log(sorted);
-  // }
+  sortTodosByDate() {
+    this.todos = this.todos.sort((a, b) => {
+      return a.dueDate - b.dueDate;
+    });
+  }
 
-  deleteTodo(todoId) {
-    delete this.todos[todoId];
+  deleteTodo(todo) {
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i] == todo) {
+        this.todos.splice(i, 1);
+      }
+    }
   }
 
   deleteTodos() {
-    todoAmount = Object.keys(this.todos).length;
+    todoAmount = this.todos.length;
     for (let i = 0; i < todoAmount; i++) {
       delete this.todos[i];
     }
@@ -47,9 +48,8 @@ export default class Project {
 
   loadTodos() {
     Builder.destroyTodos();
-    const todosArray = Object.keys(this.todos);
-    for (let i = 0; i < todosArray.length; i++) {
-      this.todos[todosArray[i]].buildSelf();
+    for (let i = 0; i < this.todos.length; i++) {
+      this.todos[i].buildSelf();
     }
   }
 }

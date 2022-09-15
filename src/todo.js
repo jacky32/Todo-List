@@ -3,14 +3,12 @@ import { format, parseISO } from "date-fns";
 
 export default class Todo {
   constructor(
-    id,
     name,
     dueDate = "12/12/1212",
     description = "Default description",
     starred = false,
     project
   ) {
-    this.id = id;
     this.name = name;
     if (typeof dueDate == Date) {
       this.dueDate = dueDate;
@@ -21,7 +19,7 @@ export default class Todo {
     this.project = project;
     this.starred = starred;
 
-    this.buildSelf();
+    // this.buildSelf();
   }
 
   convertToDate(dueDate) {
@@ -59,7 +57,7 @@ export default class Todo {
     );
 
     buttons.todoDelete.addEventListener("click", () => {
-      this.project.deleteTodo(this.id);
+      this.project.deleteTodo(this);
       buttons.todoDelete.parentElement.remove();
     });
 
