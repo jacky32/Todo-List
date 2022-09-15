@@ -53,7 +53,7 @@ export default class Builder {
     header.append(burgerIcon, addTodo, settings);
     this.content.appendChild(header);
 
-    return addTodo;
+    return { addTodo, settings };
   }
 
   static buildMain() {
@@ -210,7 +210,7 @@ export default class Builder {
 
   static buildNewTodoModal(
     name = "",
-    dueDate = "",
+    dueDate = new Date().toJSON().slice(0, 10),
     description = "",
     starred = false
   ) {
@@ -264,8 +264,7 @@ export default class Builder {
     todoNewDueDateInput.setAttribute("name", "new-todo-due-date");
     todoNewDueDateInput.setAttribute("required", true);
 
-    todoNewDueDateInput.value =
-      description != "" ? dueDate : new Date().toJSON().slice(0, 10);
+    todoNewDueDateInput.value = dueDate;
 
     todoNewDueDateLabel.textContent = "Due date:";
 

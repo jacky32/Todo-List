@@ -1,4 +1,5 @@
 import Builder from "./builder.js";
+import { format, parseISO } from "date-fns";
 
 export default class Todo {
   constructor(
@@ -11,12 +12,22 @@ export default class Todo {
   ) {
     this.id = id;
     this.name = name;
-    this.dueDate = dueDate;
+    if (typeof dueDate == Date) {
+      this.dueDate = dueDate;
+    } else {
+      this.dueDate = parseISO(dueDate);
+    }
     this.description = description;
     this.project = project;
     this.starred = starred;
 
     this.buildSelf();
+  }
+
+  convertToDate(dueDate) {
+    const [year, month, day] = dueDate.split("-");
+    const date = new Date(+year, +month - 1, +day);
+    return date;
   }
 
   get getId() {
@@ -42,7 +53,7 @@ export default class Todo {
   buildSelf() {
     const buttons = Builder.buildTodo(
       this.name,
-      this.dueDate,
+      format(this.dueDate, "dd. MM. yyyy"),
       this.description,
       this.starred
     );
@@ -55,7 +66,7 @@ export default class Todo {
     buttons.todoEdit.addEventListener("click", () => {
       const newValues = Builder.buildNewTodoModal(
         this.name,
-        this.dueDate,
+        format(this.dueDate, "yyyy-MM-dd"),
         this.description,
         this.starred
       );
@@ -66,7 +77,9 @@ export default class Todo {
         } else {
           Builder.editTodo(buttons, newValues);
           this.name = newValues.todoNewNameInput.value;
-          this.dueDate = newValues.todoNewDueDateInput.value;
+          this.dueDate = this.convertToDate(
+            newValues.todoNewDueDateInput.value
+          );
           this.description = newValues.todoNewDescriptionText.value;
           this.starred = newValues.todoNewStarInput.value;
           newValues.todoSubmit.parentElement.parentElement.parentElement.remove();

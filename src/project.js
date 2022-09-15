@@ -1,5 +1,6 @@
 import Todo from "./todo.js";
 import Builder from "./builder.js";
+import { compareAsc, format } from "date-fns";
 
 export default class Project {
   constructor(id, name) {
@@ -23,7 +24,15 @@ export default class Project {
 
     this.todos[todoId] = todo;
     this.todoCount++;
+    // this.sortTodosByDate();
   }
+
+  // sortTodosByDate() {
+  //   const sorted = Object.values(this.todos).sort((a, b) => {
+  //     return a.dueDate - b.dueDate;
+  //   });
+  //   console.log(sorted);
+  // }
 
   deleteTodo(todoId) {
     delete this.todos[todoId];

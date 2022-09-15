@@ -19,7 +19,6 @@ export default class App {
     try {
       const app = parse(window.localStorage.getItem("app"));
       const projects = app.projects;
-      console.log(projects);
       for (let i = 0; i < Object.keys(projects).length; i++) {
         const project = App.createProject(projects[i].name);
         for (let y = 0; y < Object.keys(projects[i].todos).length; y++) {
@@ -52,12 +51,15 @@ export default class App {
 
   #buildAll() {
     Builder.buildContent();
-    const addTodoButton = Builder.buildHeader();
+    const headerButtons = Builder.buildHeader();
     Builder.buildMain();
     const addProjectButton = Builder.buildProjectList();
     Builder.buildTodoContent();
 
-    addTodoButton.addEventListener("click", () => {
+    headerButtons.addTodo.addEventListener("click", () => {
+      if (App.currentProject == undefined) {
+        return alert("No project selected");
+      }
       const submitted = Builder.buildNewTodoModal();
 
       submitted.todoSubmit.addEventListener("click", (e) => {
@@ -75,6 +77,10 @@ export default class App {
           submitted.todoSubmit.parentElement.parentElement.parentElement.remove();
         }
       });
+    });
+
+    headerButtons.settings.addEventListener("click", () => {
+      setTimeout(window.localStorage.clear(), 400);
     });
 
     addProjectButton.addEventListener("click", () => {
